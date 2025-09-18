@@ -1,0 +1,43 @@
+
+<div class="container mt-4">
+  <h3>Admin Dashboard</h3>
+  <div class="row mb-3">
+    <div class="col-md-3"><div class="card p-3 text-center"><h5>Total Buses</h5><h2>{{buses.length}}</h2></div></div>
+    <div class="col-md-3"><div class="card p-3 text-center"><h5>Total Bookings</h5><h2>{{bookings.length}}</h2></div></div>
+  </div>
+
+  <div class="card p-3 mb-3">
+    <h5 *ngIf="!editing">Add Bus</h5><h5 *ngIf="editing">Edit Bus</h5>
+    <div class="row g-2">
+      <div class="col-md-3"><input class="form-control" placeholder="Name" [(ngModel)]="form.name"></div>
+      <div class="col-md-2"><input class="form-control" placeholder="From" [(ngModel)]="form.origin"></div>
+      <div class="col-md-2"><input class="form-control" placeholder="To" [(ngModel)]="form.destination"></div>
+      <div class="col-md-2"><input class="form-control" type="date" [(ngModel)]="form.travelDate"></div>
+      <div class="col-md-2"><input class="form-control" placeholder="Departure (HH:mm:ss)" [(ngModel)]="form.departureTime"></div>
+      <div class="col-md-1"><input class="form-control" type="number" placeholder="Seats" [(ngModel)]="form.totalSeats"></div>
+      <div class="col-md-1"><input class="form-control" type="number" placeholder="Available" [(ngModel)]="form.availableSeats"></div>
+      <div class="col-md-2 mt-2"><input class="form-control" type="number" placeholder="Fare" [(ngModel)]="form.fare"></div>
+    </div>
+    <div class="mt-2">
+      <button *ngIf="!editing" class="btn btn-success" (click)="add()">Add Bus</button>
+      <button *ngIf="editing" class="btn btn-primary" (click)="update()">Save</button>
+      <button *ngIf="editing" class="btn btn-secondary ms-2" (click)="cancelEdit()">Cancel</button>
+    </div>
+  </div>
+
+  <div class="card p-3">
+    <h5>All Buses</h5>
+    <table class="table table-bordered">
+      <thead><tr><th>#</th><th>Name</th><th>From</th><th>To</th><th>Date</th><th>Fare</th><th>Actions</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let b of buses">
+          <td>{{b.id}}</td><td>{{b.name}}</td><td>{{b.origin}}</td><td>{{b.destination}}</td><td>{{b.travelDate}}</td><td>{{b.fare}}</td>
+          <td>
+            <button class="btn btn-sm btn-warning me-2" (click)="edit(b)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="delete(b.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

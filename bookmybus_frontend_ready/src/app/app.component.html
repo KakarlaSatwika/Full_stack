@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">BookMyBus</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link" routerLink="/">Home</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/about">About</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/buses">Search Buses</a></li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item" *ngIf="!auth.isLoggedIn()"><a class="nav-link" routerLink="/login">Sign In</a></li>
+        <li class="nav-item" *ngIf="!auth.isLoggedIn()"><a class="nav-link" routerLink="/signup">Sign Up</a></li>
+        <li class="nav-item" *ngIf="auth.isLoggedIn()"><a class="nav-link" (click)="logout()">Logout</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="/admin/login">AdminSignIn</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer class="bg-dark text-white p-3 mt-5">
+  <div class="container text-center">
+    © {{ year }} BookMyBus — Book quickly, travel safely
+  </div>
+</footer>

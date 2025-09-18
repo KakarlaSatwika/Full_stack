@@ -1,0 +1,22 @@
+<div class="container mt-4" *ngIf="bus">
+  <h2>Book {{ bus.name }}</h2>
+
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div *ngIf="success" class="alert alert-success">{{ success }}</div>
+
+  <form (ngSubmit)="book()">
+    <div class="mb-3">
+      <label>Name</label>
+      <input [(ngModel)]="name" name="name" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label>Email</label>
+      <input [(ngModel)]="email" name="email" class="form-control" required />
+    </div>
+    <div class="mb-3">
+      <label>Seats</label>
+      <input type="number" [(ngModel)]="seats" name="seats" class="form-control" min="1" required />
+    </div>
+    <button type="submit" class="btn btn-primary">Book Now</button>
+  </form>
+</div>
