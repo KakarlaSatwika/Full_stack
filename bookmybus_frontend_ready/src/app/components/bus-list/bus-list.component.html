@@ -1,23 +1,143 @@
 
-<div class="container mt-4">
-  <div class="card p-3 mb-3">
-    <div class="row g-2">
-      <div class="col"><input class="form-control" placeholder="From" [(ngModel)]="origin" name="origin"></div>
-      <div class="col"><input class="form-control" placeholder="To" [(ngModel)]="destination" name="destination"></div>
-      <div class="col"><input class="form-control" type="date" [(ngModel)]="date" name="date"></div>
-      <div class="col-auto"><button class="btn btn-primary" (click)="search()">Search</button></div>
+<div class="container mt-4" [@fadeInOut]="isVisible ? 'in' : 'out'">
+
+  <!-- Enhanced Search Section -->
+  <div class="search-section">
+    <h2 class="mb-4" [@slideInLeft]="isVisible ? 'in' : 'out'">
+      <i class="fas fa-search me-2"></i>Find Your Bus
+    </h2>
+
+    <form class="search-form" (ngSubmit)="search()">
+      <div class="search-input">
+        <i class="fas fa-map-marker-alt"></i>
+        <input
+          class="form-control form-control-lg"
+          placeholder="From (e.g., New York)"
+          [(ngModel)]="origin"
+          name="origin"
+          required
+          [min]="getTodayDate()"
+          [@formFieldFocus]="isVisible ? 'normal' : 'normal'">
+      </div>
+
+      <div class="search-input">
+        <i class="fas fa-map-marker-alt"></i>
+        <input
+          class="form-control form-control-lg"
+          placeholder="To (e.g., Boston)"
+          [(ngModel)]="destination"
+          name="destination"
+          required
+          [@formFieldFocus]="isVisible ? 'normal' : 'normal'">
+      </div>
+
+      <div class="search-input">
+        <i class="fas fa-calendar-alt"></i>
+        <input
+          class="form-control form-control-lg"
+          type="date"
+          [(ngModel)]="date"
+          name="date"
+          [min]="getTodayDate()"
+          required
+          [@formFieldFocus]="isVisible ? 'normal' : 'normal'">
+      </div>
+
+      <button
+        class="btn btn-primary btn-lg"
+        type="submit"
+        [disabled]="isLoading"
+        [@buttonClick]="isVisible ? 'normal' : 'normal'">
+        <i class="fas fa-search me-2" *ngIf="!isLoading"></i>
+        <span class="spinner-border spinner-border-sm me-2" *ngIf="isLoading"></span>
+        {{ isLoading ? 'Searching...' : 'Search Buses' }}
+      </button>
+    </form>
+
+    <div class="mt-3" *ngIf="searchPerformed">
+      <button class="btn btn-outline-secondary clear-search-btn" (click)="clearSearch()">
+        <i class="fas fa-times me-1"></i>Clear Search
+      </button>
     </div>
   </div>
 
-  <div *ngIf="buses?.length === 0" class="alert alert-info">No buses to display</div>
+  <!-- Loading State -->
+  <div class="loading-spinner" *ngIf="isLoading" [@scaleIn]="isVisible ? 'in' : 'out'">
+    <div class="spinner"></div>
+  </div>
 
-  <table *ngIf="buses?.length" class="table table-striped">
-    <thead><tr><th>#</th><th>Name</th><th>From</th><th>To</th><th>Date</th><th>Fare</th><th></th></tr></thead>
-    <tbody>
-      <tr *ngFor="let b of buses">
-        <td>{{b.id}}</td><td>{{b.name}}</td><td>{{b.origin}}</td><td>{{b.destination}}</td><td>{{b.travelDate}}</td><td>{{b.fare}}</td>
-        <td><button class="btn btn-sm btn-success" (click)="book(b)">Book</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <!-- Results Section -->
+  <div class="results-section" *ngIf="!isLoading">
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="buses?.length === 0 && searchPerformed" [@fadeInOut]="isVisible ? 'in' : 'out'">
+      <i class="fas fa-bus-slash"></i>
+      <h4>No Buses Found</h4>
+      <p>Try adjusting your search criteria or check back later for more options.</p>
+    </div>
+
+    <!-- Bus List as Cards (Mobile-friendly) -->
+    <div class="d-md-none" *ngIf="buses?.length" [@listStagger]="isVisible ? 'in' : 'out'">
+      <div class="bus-card" *ngFor="let bus of buses; let i = index" [style.animation-delay.ms]="i * 100">
+        <div class="bus-info">
+          <div>
+            <div class="bus-name">{{ bus.name }}</div>
+            <div class="bus-route">
+              <i class="fas fa-route me-1"></i>{{ bus.origin }} → {{ bus.destination }}
+            </div>
+          </div>
+          <div class="bus-fare">${{ bus.fare }}</div>
+          <button class="btn book-btn" (click)="book(bus)">
+            <i class="fas fa-ticket-alt me-1"></i>Book Now
+          </button>
+        </div>
+        <div class="text-muted">
+          <i class="fas fa-calendar me-1"></i>{{ bus.travelDate | date:'mediumDate' }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bus List as Table (Desktop) -->
+    <div class="d-none d-md-block" *ngIf="buses?.length" [@listStagger]="isVisible ? 'in' : 'out'">
+      <div class="bus-table">
+        <table class="table table-hover mb-0">
+          <thead>
+            <tr>
+              <th><i class="fas fa-hashtag me-1"></i>ID</th>
+              <th><i class="fas fa-bus me-1"></i>Bus Name</th>
+              <th><i class="fas fa-map-marker-alt me-1"></i>From</th>
+              <th><i class="fas fa-map-marker-alt me-1"></i>To</th>
+              <th><i class="fas fa-calendar me-1"></i>Date</th>
+              <th><i class="fas fa-dollar-sign me-1"></i>Fare</th>
+              <th><i class="fas fa-ticket-alt me-1"></i>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let bus of buses; let i = index" [style.animation-delay.ms]="i * 50">
+              <td class="fw-bold text-primary">#{{ bus.id }}</td>
+              <td>
+                <div class="fw-semibold">{{ bus.name }}</div>
+              </td>
+              <td>
+                <span class="badge bg-light text-dark">{{ bus.origin }}</span>
+              </td>
+              <td>
+                <span class="badge bg-light text-dark">{{ bus.destination }}</span>
+              </td>
+              <td>{{ bus.travelDate | date:'shortDate' }}</td>
+              <td>
+                <span class="fw-bold text-success">${{ bus.fare }}</span>
+              </td>
+              <td>
+                <button class="btn btn-success btn-sm" (click)="book(bus)">
+                  <i class="fas fa-ticket-alt me-1"></i>Book
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
 </div>

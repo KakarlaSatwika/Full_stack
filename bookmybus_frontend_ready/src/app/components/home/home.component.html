@@ -1,32 +1,107 @@
 
-<section class="hero text-center">
-  <div class="container">
-    <h1 class="display-4">BookMyBus</h1>
-    <p class="lead">Fast. Reliable. Affordable. Find buses, compare fares and book your seats in seconds.</p>
-    <a routerLink="/buses" class="btn btn-primary btn-lg me-2">Search Buses</a>
-    <a routerLink="/signup" class="btn btn-outline-primary btn-lg">Get Started</a>
+<!-- Abhibus-style Booking Interface -->
+<section class="booking-hero">
+  <div class="booking-container">
+    <!-- Service Tabs -->
+    <div class="service-tabs">
+      <div class="tab-item active" data-service="buses">
+        <i class="fas fa-bus"></i>
+        <span>Buses</span>
+      </div>
+      <div class="tab-item" data-service="flights">
+        <i class="fas fa-plane"></i>
+        <span>Flights</span>
+      </div>
+      <div class="tab-item" data-service="trains">
+        <i class="fas fa-train"></i>
+        <span>Trains</span>
+      </div>
+      <div class="tab-item" data-service="hotels">
+        <i class="fas fa-hotel"></i>
+        <span>Hotels</span>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="booking-form">
+      <div class="form-title">
+        <h2>Book Buses, Trains, Flights, & Hotels</h2>
+      </div>
+
+      <form class="search-form">
+        <div class="form-row">
+          <!-- From Location -->
+          <div class="form-group location-input">
+            <div class="location-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="location-content">
+              <input type="text" placeholder="Enter departure city" class="form-control" id="fromLocation">
+            </div>
+          </div>
+
+          <!-- Swap Button -->
+          <div class="swap-button">
+            <button type="button" class="btn-swap" (click)="onSwapLocations()">
+              <i class="fas fa-exchange-alt"></i>
+            </button>
+          </div>
+
+          <!-- To Location -->
+          <div class="form-group location-input">
+            <div class="location-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div class="location-content">
+              <input type="text" placeholder="Enter destination city" class="form-control" id="toLocation">
+            </div>
+          </div>
+
+          <!-- Date -->
+          <div class="form-group date-input">
+            <input type="date" class="form-control" id="travelDate" value="2025-09-22">
+          </div>
+
+          <!-- Quick Options -->
+          <div class="quick-options">
+            <button type="button" class="quick-btn">Today</button>
+          </div>
+
+          <!-- Search Button -->
+          <div class="form-group search-btn-group">
+            <button type="submit" class="btn-search">
+              <span>Search</span>
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </section>
 
-<div class="container py-5">
-  <div class="row g-4">
-    <div class="col-md-4 text-center">
-      <div class="card p-3 shadow-sm">
-        <h5>Wide Coverage</h5>
-        <p>Thousands of routes across many cities.</p>
-      </div>
+<!-- Features Section with staggered animations -->
+<section class="features-section">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold" [@slideInLeft]="isVisible ? 'in' : 'out'">Why Choose BookMyBus?</h2>
+      <p class="lead text-muted" [@slideInRight]="isVisible ? 'in' : 'out'">Experience the best in bus travel with our premium features</p>
     </div>
-    <div class="col-md-4 text-center">
-      <div class="card p-3 shadow-sm">
-        <h5>Secure Payments</h5>
-        <p>Safe and fast checkout.</p>
-      </div>
-    </div>
-    <div class="col-md-4 text-center">
-      <div class="card p-3 shadow-sm">
-        <h5>24/7 Support</h5>
-        <p>We're here for you anytime.</p>
+
+    <div class="row g-4" [@listStagger]="isVisible ? 'in' : 'out'">
+      <div class="col-md-4" *ngFor="let feature of features; let i = index">
+        <div class="feature-card"
+             [@cardHover]="feature.isHovered ? 'hovered' : 'normal'"
+             (@cardHover.start)="onCardHover(feature, true)"
+             (@cardHover.done)="onCardHover(feature, false)"
+             [attr.data-animation]="feature.animation">
+          <span class="feature-icon">{{ feature.icon }}</span>
+          <h3 class="feature-title">{{ feature.title }}</h3>
+          <p class="feature-description">{{ feature.description }}</p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+

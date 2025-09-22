@@ -1,0 +1,58 @@
+<div class="seat-selection-container">
+  <div class="screen-section">
+    <div class="screen">
+      <div class="screen-text">SCREEN</div>
+    </div>
+  </div>
+
+  <div class="seats-legend mb-4">
+    <div class="legend-item">
+      <div class="seat-legend seat-available"></div>
+      <span>Available</span>
+    </div>
+    <div class="legend-item">
+      <div class="seat-legend seat-selected"></div>
+      <span>Selected</span>
+    </div>
+    <div class="legend-item">
+      <div class="seat-legend seat-occupied"></div>
+      <span>Occupied</span>
+    </div>
+  </div>
+
+  <div class="bus-layout">
+    <div class="seats-grid">
+      <div *ngFor="let row of rows" class="seat-row">
+        <div class="row-label">{{ row }}</div>
+        <div class="seats-in-row">
+          <div
+            *ngFor="let seat of getSeatsForRow(row)"
+            class="seat"
+            [ngClass]="getSeatClass(seat)"
+            (click)="toggleSeat(seat)"
+            [title]="'Seat ' + seat">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="booking-summary" *ngIf="selectedSeats.length > 0">
+    <div class="summary-header">
+      <h5>Selected Seats ({{ selectedSeats.length }}/6)</h5>
+      <button class="btn btn-sm btn-outline-secondary" (click)="clearSelection()">
+        Clear All
+      </button>
+    </div>
+    <div class="selected-seats-list">
+      <span *ngFor="let seat of selectedSeats" class="selected-seat-badge">
+        {{ seat }}
+      </span>
+    </div>
+    <div class="summary-footer">
+      <button class="btn btn-success btn-lg" [disabled]="selectedSeats.length === 0">
+        Confirm Seats ({{ selectedSeats.length }})
+      </button>
+    </div>
+  </div>
+</div>

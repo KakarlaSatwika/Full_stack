@@ -1,0 +1,208 @@
+/* Bus List Component Styles */
+.search-section {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  animation: slideInDown 0.5s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-form {
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr auto;
+  gap: 1rem;
+  align-items: end;
+}
+
+.search-input {
+  position: relative;
+}
+
+.search-input i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  z-index: 2;
+}
+
+.search-input input {
+  padding-left: 2.5rem;
+}
+
+.results-section {
+  animation: fadeInUp 0.5s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bus-table {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.bus-table th {
+  background: linear-gradient(45deg, #007bff, #66b3ff);
+  color: white;
+  font-weight: 600;
+  padding: 1rem;
+  border: none;
+}
+
+.bus-table td {
+  padding: 1rem;
+  vertical-align: middle;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.bus-table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.bus-table tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.01);
+}
+
+.bus-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-left: 4px solid #007bff;
+}
+
+.bus-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.2);
+}
+
+.bus-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.bus-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.bus-route {
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.bus-fare {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #28a745;
+}
+
+.book-btn {
+  background: linear-gradient(45deg, #28a745, #34ce57);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #6c757d;
+}
+
+.empty-state i {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.clear-search-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.clear-search-btn:hover {
+  background: #5a6268;
+  transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-form {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .bus-info {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .bus-table {
+    font-size: 0.9rem;
+  }
+
+  .bus-table th,
+  .bus-table td {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .search-section {
+    padding: 1rem;
+  }
+
+  .bus-card {
+    padding: 1rem;
+  }
+}

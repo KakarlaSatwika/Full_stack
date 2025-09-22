@@ -1,0 +1,330 @@
+/* Abhibus-style Booking Interface */
+.booking-hero {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #4A90E2 0%, #357ABD 50%, #1E5F99 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 2rem 0;
+}
+
+.booking-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Service Tabs */
+.service-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  border-radius: 50px;
+  padding: 0.75rem;
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.tab-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 1rem;
+  min-width: 120px;
+  justify-content: center;
+}
+
+.tab-item:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.tab-item.active {
+  background: white;
+  color: #dc3545;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  font-weight: 600;
+}
+
+.tab-item i {
+  font-size: 1.1rem;
+}
+
+/* Booking Form */
+.booking-form {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.form-title h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #333;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: -0.5px;
+}
+
+.search-form {
+  margin-top: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr 1fr;
+  gap: 1.5rem;
+  align-items: end;
+}
+
+/* Form Groups */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-input {
+  display: flex;
+  align-items: center;
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1rem;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  min-height: 60px;
+}
+
+.location-input:focus-within {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+  background: white;
+}
+
+.location-icon {
+  color: #dc3545;
+  margin-right: 0.75rem;
+  font-size: 1.2rem;
+  min-width: 20px;
+}
+
+.location-content {
+  flex: 1;
+}
+
+.location-content .form-control {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  color: #333;
+  padding: 0;
+  width: 100%;
+  font-weight: 500;
+}
+
+.location-content .form-control:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.location-content .form-control::placeholder {
+  color: #6c757d;
+  font-weight: 400;
+}
+
+/* Swap Button */
+.swap-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-swap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #dee2e6;
+  background: white;
+  color: #6c757d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.btn-swap:hover {
+  border-color: #dc3545;
+  color: #dc3545;
+  transform: rotate(180deg);
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.2);
+}
+
+/* Date Input */
+.date-input {
+  min-height: 60px;
+}
+
+.date-input .form-control {
+  border: 2px solid #e9ecef;
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1rem;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  width: 100%;
+  min-height: 60px;
+}
+
+.date-input .form-control:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+  background: white;
+}
+
+/* Quick Options */
+.quick-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-height: 60px;
+  justify-content: flex-end;
+}
+
+.quick-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid #e9ecef;
+  background: #f8f9fa;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.quick-btn:hover {
+  border-color: #dc3545;
+  background: white;
+  color: #dc3545;
+}
+
+/* Search Button */
+.search-btn-group {
+  display: flex;
+  align-items: flex-end;
+}
+
+.btn-search {
+  background: linear-gradient(45deg, #dc3545, #ff6b6b);
+  border: none;
+  border-radius: 12px;
+  padding: 1rem 2.5rem;
+  color: white;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  height: 60px;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+}
+
+.btn-search:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(220, 53, 69, 0.4);
+  background: linear-gradient(45deg, #c82333, #dc3545);
+}
+
+/* Features Section */
+.features-section {
+  padding: 5rem 0;
+  background: #f8f9fa;
+  margin-top: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .swap-button {
+    order: -1;
+    align-self: center;
+  }
+
+  .quick-options {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .booking-form {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .booking-form {
+    padding: 1.5rem;
+  }
+
+  .service-tabs {
+    flex-wrap: wrap;
+    padding: 0.5rem;
+  }
+
+  .tab-item {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    min-width: 100px;
+  }
+
+  .form-title h2 {
+    font-size: 1.5rem;
+  }
+
+  .btn-search {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .booking-hero {
+    padding: 1rem 0;
+  }
+
+  .booking-form {
+    padding: 1rem;
+  }
+
+  .form-title h2 {
+    font-size: 1.3rem;
+  }
+
+  .service-tabs {
+    margin-bottom: 2rem;
+  }
+
+  .tab-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+  }
+}

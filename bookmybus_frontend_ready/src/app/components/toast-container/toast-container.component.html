@@ -1,0 +1,34 @@
+<div class="toast-container">
+  <div
+    *ngFor="let toast of toastService.toasts; let i = index"
+    class="toast-wrapper"
+    [ngClass]="getToastClasses(toast.type)"
+    [@slideInRight]="'in'"
+    [style.animation-delay.ms]="i * 100">
+
+    <div class="toast-content">
+      <div class="toast-header">
+        <i [class]="getToastIcon(toast.type)" class="toast-icon"></i>
+        <strong class="toast-title">{{ toast.title }}</strong>
+        <button
+          type="button"
+          class="btn-close"
+          (click)="removeToast(toast)"
+          aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div class="toast-body">
+        {{ toast.message }}
+      </div>
+
+      <div class="toast-progress" *ngIf="toast.duration">
+        <div
+          class="toast-progress-bar"
+          [style.animation-duration.ms]="toast.duration">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

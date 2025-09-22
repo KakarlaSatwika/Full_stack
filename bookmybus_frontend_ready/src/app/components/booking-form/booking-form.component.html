@@ -17,6 +17,13 @@
       <label>Seats</label>
       <input type="number" [(ngModel)]="seats" name="seats" class="form-control" min="1" required />
     </div>
+
+    <!-- Seat Selection Component -->
+    <div class="seat-selection-section" *ngIf="seats > 0">
+      <h4>Choose Your Seats</h4>
+      <app-seat-selection (seatsSelected)="onSeatsSelected($event)"></app-seat-selection>
+    </div>
+
     <button type="submit" class="btn btn-primary">Book Now</button>
   </form>
 </div>

@@ -1,0 +1,40 @@
+<div class="skeleton-container" *ngIf="show">
+  <!-- Card Skeleton -->
+  <ng-container *ngIf="type === 'card'">
+    <div class="skeleton-card" *ngFor="let item of skeletonItems">
+      <div class="skeleton-header">
+        <div class="skeleton-line skeleton-title"></div>
+        <div class="skeleton-line skeleton-subtitle"></div>
+      </div>
+      <div class="skeleton-body">
+        <div class="skeleton-line" *ngFor="let line of [1,2,3]"></div>
+      </div>
+      <div class="skeleton-footer">
+        <div class="skeleton-button"></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Table Skeleton -->
+  <div class="skeleton-table" *ngIf="type === 'table'">
+    <div class="skeleton-table-header">
+      <div class="skeleton-line" *ngFor="let header of [1,2,3,4,5]"></div>
+    </div>
+    <div class="skeleton-table-row" *ngFor="let row of skeletonItems">
+      <div class="skeleton-line" *ngFor="let cell of [1,2,3,4,5]"></div>
+    </div>
+  </div>
+
+  <!-- Form Skeleton -->
+  <div class="skeleton-form" *ngIf="type === 'form'">
+    <div class="skeleton-form-row" *ngFor="let row of [1,2,3]">
+      <div class="skeleton-input"></div>
+    </div>
+    <div class="skeleton-button large"></div>
+  </div>
+
+  <!-- Text Skeleton -->
+  <div class="skeleton-text" *ngIf="type === 'text'">
+    <div class="skeleton-line" *ngFor="let line of skeletonItems"></div>
+  </div>
+</div>
